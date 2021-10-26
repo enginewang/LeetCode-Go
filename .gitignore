@@ -1,5 +1,6 @@
 .idea/
 .DS_Store/
+.DS_Store
 go.mod
 # Binaries for programs and plugins
 *.exe
