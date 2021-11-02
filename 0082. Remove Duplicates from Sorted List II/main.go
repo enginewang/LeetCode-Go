@@ -1,49 +1,52 @@
 package main
 
+import "fmt"
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
 }
 
+
 func deleteDuplicates(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
-	dummyNode := &ListNode{Val: -1, Next: head}
-	prev := dummyNode
-	cur := dummyNode.Next
-	next := cur.Next
-	for next != nil {
-		find := false
-		for next != nil && cur.Val == next.Val {
-			cur = cur.Next
-			next = cur.Next
-			find = true
-		}
-		if find{
-			if next == nil{
-				prev.Next = nil
-				return dummyNode.Next
+	DummyNode := &ListNode{Val: -1, Next: head}
+	left := DummyNode
+	right := head
+	for right.Next != nil {
+		findSame := false
+		for right.Next.Val == right.Val {
+			findSame = true
+			if right.Next.Next != nil {
+				right = right.Next
+			} else {
+				left.Next = nil
+				return DummyNode.Next
 			}
-			cur = cur.Next
-			next = cur.Next
-		} else{
-			cur = cur.Next
-			prev = prev.Next
-			next = next.Next
+
 		}
-		prev.Next = cur
+		if findSame {
+			left.Next = right.Next
+			right = right.Next
+		} else {
+			right = right.Next
+			left = left.Next
+		}
 	}
-	return dummyNode.Next
+	return DummyNode.Next
 }
 
 func main() {
-	node7 := ListNode{5, nil}
+	node8 := ListNode{5, nil}
+	node7 := ListNode{5, &node8}
 	node6 := ListNode{4, &node7}
-	node5 := ListNode{3, &node6}
-	node4 := ListNode{3, &node5}
-	node3 := ListNode{2, &node4}
-	node2 := ListNode{1, &node3}
-	node1 := ListNode{1, &node2}
-	deleteDuplicates(&node1)
+	//node5 := ListNode{3, &node6}
+	//node4 := ListNode{3, &node5}
+	//node3 := ListNode{2, &node4}
+	//node2 := ListNode{1, &node3}
+	//node1 := ListNode{1, &node2}
+	r := deleteDuplicates(&node6)
+	fmt.Println(r)
 }
