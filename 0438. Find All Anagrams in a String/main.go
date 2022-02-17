@@ -6,18 +6,23 @@ import (
 
 func findAnagrams(s string, p string) []int {
 	var result []int
-	sDict := make([]int, 26)
-	pDict := make([]int, 26)
+	// 这里只有26个字母，用数组代替map也可以
+	window := make([]int, 26)
+	need := make([]int, 26)
 	for _, r := range p {
-		pDict[r-'a']++
+		need[r-'a']++
 	}
 	left := 0
 	for right := 0; right < len(s); right++{
+		if right==2{
+			fmt.Println("1")
+		}
 		curChar := s[right]
-		sDict[curChar-'a']++
-		if sDict[curChar-'a'] > pDict[curChar-'a']{
-			for sDict[curChar-'a'] > pDict[curChar-'a']{
-				sDict[s[left]-'a']--
+		window[curChar-'a']++
+		// 只要最新的多于need，必然要开始从左边减少，一直到这个元素的个数等于need为止
+		if window[curChar-'a'] > need[curChar-'a']{
+			for window[curChar-'a'] > need[curChar-'a']{
+				window[s[left]-'a']--
 				left++
 			}
 		}
@@ -31,5 +36,5 @@ func findAnagrams(s string, p string) []int {
 func main() {
 	//fmt.Println(sameString("abc", "bca"))
 	//fmt.Println(sameString("abc", "bda"))
-	fmt.Println(findAnagrams("cbaebabacd", "abc"))
+	fmt.Println(findAnagrams("cbgebabacd", "abc"))
 }

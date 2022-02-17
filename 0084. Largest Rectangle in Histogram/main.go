@@ -48,6 +48,7 @@ func largestRectangleArea(heights []int) int {
 		}
 		s.Push(Elem{id: i, height: h})
 	}
+	fmt.Println(s.S)
 	// 最后栈中的元素
 	for len(s.S) > 1 {
 		t := s.Top()
@@ -62,6 +63,6 @@ func largestRectangleArea(heights []int) int {
 }
 
 func main() {
-	height := []int{6, 7, 5, 2, 4, 5, 9, 3}
+	height := []int{2,1,5,6,2,3}
 	fmt.Println(largestRectangleArea(height))
 }
