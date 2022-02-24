@@ -42,51 +42,26 @@ import (
 
 
 
-//// 另一个方式是回溯法
-//func subsetsWithDup(nums []int) [][]int {
-//	sort.Ints(nums)
-//	var ret [][]int
-//	helper(nums, 0, []int{}, &ret)
-//	return ret
-//}
-//
-//func helper(nums []int, start int, temp []int, ret *[][]int) {
-//	*ret = append(*ret, append([]int{}, temp...))
-//	for i := start; i < len(nums); i++ {
-//		if i > start && nums[i-1] == nums[i] {
-//			continue
-//		}
-//		temp = append(temp, nums[i])
-//		helper(nums, i+1, temp, ret)
-//		temp = temp[:len(temp)-1]
-//	}
-//}
-
-
-
-var result [][]int
+// 另一个方式是回溯法
 func subsetsWithDup(nums []int) [][]int {
 	sort.Ints(nums)
-	result = make([][]int, 0)
-	dfs([]int{}, nums, 0)
-	return result
+	var ret [][]int
+	helper(nums, 0, []int{}, &ret)
+	return ret
 }
 
-func dfs(temp []int, nums []int, start int)  {
-	tmp := make([]int, len(temp))
-	copy(tmp, temp)
-	result = append(result, tmp)
-	for i := start; i < len(nums); i++{
-		// 举例，假如是[1,1,2,2]，第一个1开始，后面所有的都可以，但是第二个1，直接pass，因为它
-		// 开始temp的前面一个都做过一次了
-		if i > start && nums[i] == nums[i-1]{
+func helper(nums []int, start int, temp []int, ret *[][]int) {
+	*ret = append(*ret, append([]int{}, temp...))
+	for i := start; i < len(nums); i++ {
+		if i > start && nums[i-1] == nums[i] {
 			continue
 		}
 		temp = append(temp, nums[i])
-		dfs(temp, nums, i+1)
+		helper(nums, i+1, temp, ret)
 		temp = temp[:len(temp)-1]
 	}
 }
+
 
 func main() {
 	fmt.Println(subsetsWithDup([]int{1, 1, 2, 2}))
