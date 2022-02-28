@@ -2,22 +2,22 @@ package main
 
 import "fmt"
 
+var result [][]int
+
 func combine(n int, k int) [][]int {
-	var result [][]int
-	//cur := make([]int, 0, 5)
-	backtracking(1, []int{}, &result, n, k)
+	backtracking(1, []int{}, n, k)
 	return result
 }
 
-func backtracking(start int, cur []int, result *[][]int, n int, k int) {
+func backtracking(start int, cur []int, n int, k int) {
 	if len(cur) == k {
 		tmp := make([]int, len(cur))
 		copy(tmp, cur)
-		*result = append(*result, tmp)
+		result = append(result, tmp)
 	}
 	for i := start; i <= n; i++ {
 		cur = append(cur, i)
-		backtracking(i+1, cur, result, n, k)
+		backtracking(i+1, cur, n, k)
 		cur = cur[:len(cur)-1]
 	}
 }
