@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 var result [][]int
+
 // 递归
 //func permute(nums []int) [][]int {
 //	result = make([][]int, 0)
@@ -32,7 +33,7 @@ var result [][]int
 func permute(nums []int) [][]int {
 	var path []int
 	var result [][]int
-	choiceDict := make(map[int] bool)
+	choiceDict := make(map[int]bool)
 	for _, r := range nums {
 		choiceDict[r] = true
 	}
@@ -40,13 +41,13 @@ func permute(nums []int) [][]int {
 	return result
 }
 
-func backtrack(path []int, nums []int, choiceDict map[int] bool, result *[][]int)  {
-	if len(path) == len(choiceDict){
+func backtrack(path []int, nums []int, choiceDict map[int]bool, result *[][]int) {
+	if len(path) == len(choiceDict) {
 		tmp := make([]int, len(path))
 		copy(tmp, path)
 		*result = append(*result, tmp)
 	}
-	for _, choice := range nums{
+	for _, choice := range nums {
 		if choiceDict[choice] {
 			path = append(path, choice)
 			choiceDict[choice] = false
@@ -62,5 +63,5 @@ func backtrack(path []int, nums []int, choiceDict map[int] bool, result *[][]int
 // 123
 // 312 132 123 321 231 213
 func main() {
-	fmt.Println(permute([]int{5,4,6,2}))
+	fmt.Println(permute([]int{5, 4, 6, 2}))
 }
