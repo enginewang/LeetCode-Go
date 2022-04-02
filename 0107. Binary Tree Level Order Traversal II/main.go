@@ -1,6 +1,5 @@
 package main
 
-import "fmt"
 
 type TreeNode struct {
 	Val   int
@@ -32,18 +31,15 @@ func levelOrder(root *TreeNode) [][]int {
 		result = append(result, row)
 		row = []int{}
 	}
+	p, q := 0, len(result)-1
+	for p < q{
+		result[p], result[q] = result[q], result[p]
+		p++
+		q--
+	}
 	return result
 }
 
 func main() {
-	Node1 := &TreeNode{Val: 3, Left: nil, Right: nil}
-	Node2 := &TreeNode{Val: 9, Left: nil, Right: nil}
-	Node3 := &TreeNode{Val: 20, Left: nil, Right: nil}
-	Node4 := &TreeNode{Val: 15, Left: nil, Right: nil}
-	Node5 := &TreeNode{Val: 7, Left: nil, Right: nil}
-	Node1.Left = Node2
-	Node1.Right = Node3
-	Node3.Left = Node4
-	Node3.Right = Node5
-	fmt.Println(levelOrder(Node1))
+
 }
