@@ -18,7 +18,6 @@ func coinChange(coins []int, amount int) int {
 				continue
 			}
 			dp[i] = min(dp[i], dp[i-coin]+1)
-			//fmt.Printf("%v %v", i, dp[i])
 		}
 	}
 	if dp[amount] == math.MaxInt32 {
