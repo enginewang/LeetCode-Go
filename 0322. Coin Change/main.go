@@ -7,6 +7,7 @@ import (
 
 // 迭代
 func coinChange(coins []int, amount int) int {
+	// dp[amount]表示在amount金额下最少需要的硬币个数
 	dp := make([]int, amount+1)
 	for i := 0; i <= amount; i++ {
 		dp[i] = math.MaxInt32
