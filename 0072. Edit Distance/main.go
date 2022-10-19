@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 func minDistance(word1 string, word2 string) int {
+	// dp[i][j]的含义是word1[:i]和word2[:j]的最小编辑距离
 	dp := make([][]int, len(word1)+1)
 	for row, _ := range dp {
 		dp[row] = make([]int, len(word2)+1)
