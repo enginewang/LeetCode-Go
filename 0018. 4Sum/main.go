@@ -5,24 +5,28 @@ import (
 	"sort"
 )
 
-func fourSum(nums []int, target int) [][]int {
+func fourSum(nums []int, targetet int) [][]int {
 	if len(nums) < 4 {
 		return [][]int{}
 	}
 	sort.Ints(nums)
 	var result [][]int
+	// 跟三数之和一样，这里也是循环，找到i到最后的四个数字，且包括i
 	for i := 0; i < len(nums)-3; i++ {
+		// 去掉重复的，因为如果后面跟前面一样，那么前面肯定已经都找完了，再找都是重复的
 		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
+		// 这里因为是四个数字，需要再加一层跟上面类似的循环
+		// 只有两个数字的和才能双指针
 		for j := i + 1; j < len(nums)-2; j++ {
 			if j > i+1 && nums[j] == nums[j-1] {
 				continue
 			}
-			left, right, targ := j+1, len(nums)-1, target-nums[i]-nums[j]
+			left, right, target := j+1, len(nums)-1, targetet-nums[i]-nums[j]
 			for left < right {
 				sum := nums[left] + nums[right]
-				if sum == targ {
+				if sum == target {
 					result = append(result, []int{nums[i], nums[j], nums[left], nums[right]})
 					left++
 					right--
@@ -32,7 +36,7 @@ func fourSum(nums []int, target int) [][]int {
 					for left < right && nums[right] == nums[right+1] {
 						right--
 					}
-				} else if sum < targ {
+				} else if sum < target {
 					left++
 				} else {
 					right--
