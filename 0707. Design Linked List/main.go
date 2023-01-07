@@ -1,19 +1,20 @@
 package main
 
+// 设计链表
+
 type MyLinkedList struct {
-	Val int
+	Val  int
 	Next *MyLinkedList
 }
 
-
+// 虚拟头结点
 func Constructor() MyLinkedList {
 	return MyLinkedList{Val: -1, Next: nil}
 }
 
-
 func (this *MyLinkedList) Get(index int) int {
 	cur := this.Next
-	for i := 0; i < index; i++{
+	for i := 0; i < index; i++ {
 		if cur != nil {
 			cur = cur.Next
 		} else {
@@ -26,14 +27,12 @@ func (this *MyLinkedList) Get(index int) int {
 	return cur.Val
 }
 
-
-func (this *MyLinkedList) AddAtHead(val int)  {
+func (this *MyLinkedList) AddAtHead(val int) {
 	newNode := MyLinkedList{Val: val, Next: this.Next}
 	this.Next = &newNode
 }
 
-
-func (this *MyLinkedList) AddAtTail(val int)  {
+func (this *MyLinkedList) AddAtTail(val int) {
 	newNode := MyLinkedList{Val: val, Next: nil}
 	cur := this
 	for cur.Next != nil {
@@ -42,11 +41,10 @@ func (this *MyLinkedList) AddAtTail(val int)  {
 	cur.Next = &newNode
 }
 
-
-func (this *MyLinkedList) AddAtIndex(index int, val int)  {
+func (this *MyLinkedList) AddAtIndex(index int, val int) {
 	if index < 0 {
 		this.AddAtHead(val)
-	} else{
+	} else {
 		newNode := MyLinkedList{Val: val, Next: nil}
 		cur := this
 		for index > 0 {
@@ -65,8 +63,7 @@ func (this *MyLinkedList) AddAtIndex(index int, val int)  {
 	}
 }
 
-
-func (this *MyLinkedList) DeleteAtIndex(index int)  {
+func (this *MyLinkedList) DeleteAtIndex(index int) {
 	cur := this
 	for index > 0 {
 		index--
@@ -81,9 +78,6 @@ func (this *MyLinkedList) DeleteAtIndex(index int)  {
 	}
 	cur.Next = cur.Next.Next
 }
-
-//["MyLinkedList","addAtHead","deleteAtIndex","addAtHead","addAtHead","addAtHead","addAtHead","addAtHead","addAtTail","get","deleteAtIndex","deleteAtIndex"]
-//[[],[2],[1],[2],[7],[3],[2],[5],[5],[5],[6],[4]]
 
 func main() {
 	linkedList := Constructor()

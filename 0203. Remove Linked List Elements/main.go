@@ -1,6 +1,6 @@
 package main
 
-// 要想达到O(1)的空间复杂度，方式是翻转后半个链表，然后就可以比较了
+// 给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回新的头节点 。
 
 type ListNode struct {
 	Val  int
@@ -15,10 +15,11 @@ func removeElements(head *ListNode, val int) *ListNode {
 		return nil
 	}
 	cur := head
+	// 一直往后走，遇到了next等于val的就删掉next
 	for cur.Next != nil {
-		if cur.Next.Val == val{
+		if cur.Next.Val == val {
 			cur.Next = cur.Next.Next
-		}else {
+		} else {
 			cur = cur.Next
 		}
 	}

@@ -5,6 +5,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// 删除倒数第N个节点，那么我们当前遍历的指针一定要指向 第N个节点的前一个节点
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	if head == nil {
 		return head
@@ -12,13 +13,14 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	dummyNode := &ListNode{Val: -1, Next: head}
 	count := 0
 	cur := head
-	for cur != nil{
+	// 首先要遍历一遍算一下有多长，从而计算倒数第N个是正数第几个
+	for cur != nil {
 		cur = cur.Next
 		count++
 	}
 	id := count - n
 	cur = dummyNode
-	for id > 0{
+	for id > 0 {
 		cur = cur.Next
 		id--
 	}
@@ -28,9 +30,5 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 
 func main() {
 	node3 := ListNode{5, nil}
-	//node5 := ListNode{4, &node3}
-	//node4 := ListNode{3, &node5}
-	//node2 := ListNode{2, &node4}
-	//node1 := ListNode{1, &node2}
 	removeNthFromEnd(&node3, 1)
 }

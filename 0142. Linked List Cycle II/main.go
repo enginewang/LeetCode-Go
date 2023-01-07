@@ -1,44 +1,13 @@
 package main
 
+/*
+一个fast指针和一个slow指针，如果存在环，fast一定能追上slow
+*/
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
 }
-
-//func detectCycle(head *ListNode) *ListNode {
-//	m := make(map[*ListNode] bool)
-//	count := 0
-//	for head != nil {
-//		if _, ok := m[head]; ok{
-//			return head
-//		}
-//		m[head] = true
-//		head = head.Next
-//		count++
-//	}
-//	return nil
-//}
-
-//
-//func detectCycle(head *ListNode) *ListNode {
-//	if head == nil {
-//		return nil
-//	}
-//	slow, fast := head, head
-//	for fast.Next != nil && fast.Next.Next != nil {
-//		fast = fast.Next.Next
-//		slow = slow.Next
-//		if slow == fast {
-//			slow = head
-//			for slow != fast {
-//				slow = slow.Next
-//				fast = fast.Next
-//			}
-//			return slow
-//		}
-//	}
-//	return nil
-//}
 
 func detectCycle(head *ListNode) *ListNode {
 	if head == nil {
@@ -49,8 +18,8 @@ func detectCycle(head *ListNode) *ListNode {
 	for fast.Next != nil && fast.Next.Next != nil {
 		fast = fast.Next.Next
 		slow = slow.Next
-		if fast == slow{
-			for slow != head{
+		if fast == slow {
+			for slow != head {
 				slow = slow.Next
 				head = head.Next
 			}
