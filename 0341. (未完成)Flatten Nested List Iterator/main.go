@@ -33,20 +33,20 @@ type NestedIterator struct {
 	elems []int
 }
 
-func Constructor(nestedList []*NestedInteger) *NestedIterator {
-	var result []int
-	dfs := func(nestedList []*NestedInteger) {
-		for _, item := range nestedList {
-			if item.IsInteger() {
-				result = append(result, item.GetInteger())
-			} else {
-				dfs(item.GetList())
-			}
-		}
-	}
-	dfs(nestedList)
-	return &NestedIterator{result}
-}
+//func Constructor(nestedList []*NestedInteger) *NestedIterator {
+//	var result []int
+//	dfs := func(nestedList []*NestedInteger) {
+//		for _, item := range nestedList {
+//			if item.IsInteger() {
+//				result = append(result, item.GetInteger())
+//			} else {
+//				dfs(item.GetList())
+//			}
+//		}
+//	}
+//	dfs(nestedList)
+//	return &NestedIterator{result}
+//}
 
 func (this *NestedIterator) Next() int {
 	r := this.elems[0]
