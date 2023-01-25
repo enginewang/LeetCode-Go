@@ -1,25 +1,26 @@
 package main
 
-type Node struct {
+import "math"
+
+type TreeNode struct {
 	Val   int
-	Left  *Node
-	Right *Node
-	Next  *Node
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func connect(root *Node) *Node {
+func largestValues(root *TreeNode) []int {
 	if root == nil {
-		return root
+		return []int{}
 	}
-	var queue []*Node
+	var queue []*TreeNode
+	var result []int
 	queue = append(queue, root)
 	for len(queue) > 0 {
 		length := len(queue)
+		rowMax := -math.MaxInt64
 		for i := 0; i < length; i++ {
-			if i == length-1 {
-				queue[0].Next = nil
-			} else {
-				queue[0].Next = queue[1]
+			if queue[0].Val > rowMax {
+				rowMax = queue[0].Val
 			}
 			if queue[0].Left != nil {
 				queue = append(queue, queue[0].Left)
@@ -29,8 +30,9 @@ func connect(root *Node) *Node {
 			}
 			queue = queue[1:]
 		}
+		result = append(result, rowMax)
 	}
-	return root
+	return result
 }
 
 func main() {

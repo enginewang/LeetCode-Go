@@ -1,26 +1,19 @@
 package main
 
-type Node struct {
+type TreeNode struct {
 	Val   int
-	Left  *Node
-	Right *Node
-	Next  *Node
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func connect(root *Node) *Node {
-	if root == nil {
-		return root
-	}
-	var queue []*Node
+func findBottomLeftValue(root *TreeNode) int {
+	var queue []*TreeNode
 	queue = append(queue, root)
+	var result int
 	for len(queue) > 0 {
 		length := len(queue)
+		result = queue[0].Val
 		for i := 0; i < length; i++ {
-			if i == length-1 {
-				queue[0].Next = nil
-			} else {
-				queue[0].Next = queue[1]
-			}
 			if queue[0].Left != nil {
 				queue = append(queue, queue[0].Left)
 			}
@@ -30,7 +23,7 @@ func connect(root *Node) *Node {
 			queue = queue[1:]
 		}
 	}
-	return root
+	return result
 }
 
 func main() {

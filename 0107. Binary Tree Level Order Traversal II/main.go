@@ -1,6 +1,5 @@
 package main
 
-
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -31,11 +30,8 @@ func levelOrder(root *TreeNode) [][]int {
 		result = append(result, row)
 		row = []int{}
 	}
-	p, q := 0, len(result)-1
-	for p < q{
-		result[p], result[q] = result[q], result[p]
-		p++
-		q--
+	for i := 0; i < len(result)/2; i++ {
+		result[i], result[len(result)-i-1] = result[len(result)-i-1], result[i]
 	}
 	return result
 }
