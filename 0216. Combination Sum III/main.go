@@ -2,32 +2,35 @@ package main
 
 import "fmt"
 
+var result [][]int
+
 func combinationSum3(k int, n int) [][]int {
-	var result [][]int
-	backtrack([]int{}, 1, 0, k, n, &result)
+	result = make([][]int, 0)
+	backtrack([]int{}, 0, 1, n, k)
 	return result
 }
 
-func backtrack(curPath []int, start int, sum int, count int, target int, result *[][]int) {
-	if len(curPath) == count {
+func backtrack(temp []int, sum int, start int, target int, count int) {
+	if len(temp) == count {
 		if sum == target {
-			tmp := make([]int, len(curPath))
-			copy(tmp, curPath)
-			*result = append(*result, tmp)
+			tmp := make([]int, len(temp))
+			copy(tmp, temp)
+			result = append(result, tmp)
 			return
 		} else {
 			return
 		}
 	}
-	if sum >= target {
+	if sum > target {
 		return
 	}
+	// 因为可以被无限次选取，temp表示从start开始到最后的结果
 	for i := start; i < 10; i++ {
-		curPath = append(curPath, i)
+		temp = append(temp, i)
 		sum += i
-		backtrack(curPath, i+1, sum, count, target, result)
+		backtrack(temp, sum, i+1, target, count)
 		sum -= i
-		curPath = curPath[:len(curPath)-1]
+		temp = temp[:len(temp)-1]
 	}
 }
 

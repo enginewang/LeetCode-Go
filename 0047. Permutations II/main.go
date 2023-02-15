@@ -22,13 +22,12 @@ func dfs(temp []int, nums []int, visited []int) {
 		result = append(result, tmp)
 	}
 	for i := 0; i < len(nums); i++ {
-		if visited[i] == 1{
+		if visited[i] == 1 {
 			continue
 		}
-		// 这里比难理解
-		// 其实就是说，如果之前访问过i-1，那么下一个i直接pass
+		// 为了去掉可能重复的情况，如果之前访问过i-1，那么下一个i直接pass
 		// 如果是说之前的没访问过，这里pass也正确，最后改成==0
-		if i > 0 && nums[i] == nums[i-1] && visited[i-1] == 1{
+		if i > 0 && nums[i] == nums[i-1] && visited[i-1] == 1 {
 			continue
 		}
 		visited[i] = 1
@@ -40,5 +39,5 @@ func dfs(temp []int, nums []int, visited []int) {
 }
 
 func main() {
-	fmt.Println(permuteUnique([]int{1,1,2,3}))
+	fmt.Println(permuteUnique([]int{1, 1, 2, 3}))
 }
