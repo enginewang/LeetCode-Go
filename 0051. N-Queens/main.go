@@ -1,6 +1,9 @@
 package main
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 func solveNQueens(n int) [][]string {
 	// 初始化棋盘
@@ -69,5 +72,5 @@ func judgeValid(board [][]string, row int, col int) bool {
 }
 
 func main() {
-	print(solveNQueens(4))
+	fmt.Println(solveNQueens(4))
 }
