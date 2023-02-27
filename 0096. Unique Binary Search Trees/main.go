@@ -2,26 +2,17 @@ package main
 
 import "fmt"
 
-// 递归法
+// 动态规划
 func numTrees(n int) int {
-	memo := make(map[int]int)
-	return helper(n, &memo)
-}
-
-func helper(n int, memo *map[int] int) int {
-	if n == 0 || n == 1 {
-		return 1
-	}
-	if (*memo)[n] > 0 {
-		return (*memo)[n]
-	} else {
-		result := 0
-		for i := 0; i < n; i++ {
-			result += helper(i, memo)*helper(n-1-i, memo)
+	dp := make([]int, n+1)
+	dp[0] = 1
+	for i := 1; i <= n; i++ {
+		for j := 0; j < i; j++ {
+			dp[i] += dp[j] * dp[i-j-1]
 		}
-		(*memo)[n] = result
-		return result
 	}
+	fmt.Println(dp)
+	return dp[n]
 }
 
 func main() {

@@ -11,11 +11,11 @@ func permuteUnique(nums []int) [][]int {
 	sort.Ints(nums)
 	result = make([][]int, 0)
 	visited := make([]int, len(nums))
-	dfs([]int{}, nums, visited)
+	backtrack([]int{}, nums, visited)
 	return result
 }
 
-func dfs(temp []int, nums []int, visited []int) {
+func backtrack(temp []int, nums []int, visited []int) {
 	if len(temp) == len(nums) {
 		tmp := make([]int, len(temp))
 		copy(tmp, temp)
@@ -32,7 +32,7 @@ func dfs(temp []int, nums []int, visited []int) {
 		}
 		visited[i] = 1
 		temp = append(temp, nums[i])
-		dfs(temp, nums, visited)
+		backtrack(temp, nums, visited)
 		visited[i] = 0
 		temp = temp[:len(temp)-1]
 	}
